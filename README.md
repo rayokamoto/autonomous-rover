@@ -8,3 +8,29 @@ To ensure a consistent environment for this project, we use Ubuntu 22.04 LTS. Th
 There are several ways of setting up your development environment, such as using a lightweight Linux virtual machine (WSL on Windows or RoboStack on macOS), or using the native operating system.
 
 Please follow [Setting up your development environment - Windows & Linux](/docs/dev-setup-windows-linux.md) or [Setting up your development environment - macOS](/docs/dev-setup-macos.md) depending on your operating system.
+
+Install the autonomous-rover package:
+
+```bash
+git clone https://github.com/rayokamoto/autonomous-rover.git
+rosdep update && rosdep install --from-path src --ignore-src -y
+colcon build --symlink-install
+source install/setup.sh
+```
+
+**You need to run the following commands in seperate terminals.**
+
+Launch Gazbeo:
+```bash
+ros2 launch autonomous-rover launch_sim.launch.py world:=src/autonomous-rover/worlds/obstacles.world
+```
+
+Launch RViz:
+```bash
+ros2 run rviz2 rviz2 -d src/autonomous-rover/config/main.rviz --ros-args -p use_sim_time:=true
+```
+
+Move the robot with your keyboard:
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
