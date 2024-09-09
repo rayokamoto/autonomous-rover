@@ -11,6 +11,12 @@ Please follow [Setting up your development environment - Windows & Linux](/docs/
 
 Install the autonomous-rover package:
 
+Install the following dependencies if they are not installed by default:
+
+```bash
+sudo apt install ros-humble-twist-mux
+```
+
 ```bash
 git clone https://github.com/rayokamoto/autonomous-rover.git
 rosdep update && rosdep install --from-path src --ignore-src -y
