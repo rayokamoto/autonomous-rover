@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="default">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- <include>
+      <uri>model://ground_plane</uri>
+    </include> -->
+
+    <include>
+      <uri>model://comp_track</uri>
+    </include>
+
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>-15.5892 0.392985 21.6628 0 0.851642 0.028194</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>
