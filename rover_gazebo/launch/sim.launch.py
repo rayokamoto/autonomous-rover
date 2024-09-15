@@ -10,14 +10,13 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
 
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
-    # !!! MAKE SURE YOU SET THE PACKAGE NAME CORRECTLY !!!
 
-    package_name = "rover_bringup"  # <--- CHANGE ME
+    bringup_package = "rover_bringup"
 
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
-                [FindPackageShare(package_name), "launch", "rsp.launch.py"]
+                [FindPackageShare("rover_description"), "launch", "description.launch.py"]
             )
         ),
         launch_arguments={"use_sim_time": "true", "use_ros2_control": "true"}.items(),
@@ -26,14 +25,14 @@ def generate_launch_description():
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
-                [FindPackageShare(package_name), "launch", "joystick.launch.py"]
+                [FindPackageShare(bringup_package), "launch", "joystick.launch.py"]
             )
         ),
         launch_arguments={"use_sim_time": "true"}.items(),
     )
 
     twist_mux_params = PathJoinSubstitution(
-        [FindPackageShare(package_name), "config", "twist_mux.yaml"]
+        [FindPackageShare(bringup_package), "config", "twist_mux.yaml"]
     )
     twist_mux = Node(
         package="twist_mux",
@@ -43,7 +42,7 @@ def generate_launch_description():
     )
 
     gazebo_params_file = PathJoinSubstitution(
-        [FindPackageShare(package_name), "config", "gazebo_params.yaml"]
+        [FindPackageShare(bringup_package), "config", "gazebo_params.yaml"]
     )
 
     # Include the Gazebo launch file, provided by the gazebo_ros package

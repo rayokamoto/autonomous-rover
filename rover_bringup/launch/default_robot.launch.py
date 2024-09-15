@@ -16,7 +16,7 @@ def generate_launch_description():
 
     rsp = IncludeLaunchDescription(
         PathJoinSubstitution(
-            [FindPackageShare(package_name), "launch", "rsp.launch.py"]
+            [FindPackageShare("rover_description"), "launch", "description.launch.py"]
         ),
         launch_arguments={"use_sim_time": "false", "use_ros2_control": "true"}.items(),
     )

@@ -4,7 +4,7 @@ project(rover_description)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY rviz urdf
+  DIRECTORY launch rviz urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
