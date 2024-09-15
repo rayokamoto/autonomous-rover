@@ -9,13 +9,14 @@ There are several ways of setting up your development environment, such as using
 
 Please follow [Setting up your development environment - Windows & Linux](/docs/dev-setup-windows-linux.md) or [Setting up your development environment - macOS](/docs/dev-setup-macos.md) depending on your operating system.
 
-Install the autonomous-rover package:
 
 Install the following dependencies if they are not installed by default:
 
 ```bash
 sudo apt install ros-humble-twist-mux
 ```
+
+Install the autonomous-rover package:
 
 ```bash
 git clone https://github.com/rayokamoto/autonomous-rover.git
@@ -26,17 +27,20 @@ source install/setup.sh
 
 **You need to run the following commands in seperate terminals.**
 
-Launch Gazbeo:
+Launch Gazebo:
+
 ```bash
-ros2 launch autonomous-rover launch_sim.launch.py world:=src/autonomous-rover/worlds/obstacles.world
+ros2 launch rover_bringup launch_sim.launch.py world:=src/rover_gazebo/worlds/obstacles.world
 ```
 
 Launch RViz:
+
 ```bash
-ros2 run rviz2 rviz2 -d src/autonomous-rover/config/main.rviz --ros-args -p use_sim_time:=true
+ros2 run rviz2 rviz2 -d src/rover_description/rviz/main.rviz --ros-args -p use_sim_time:=true
 ```
 
 Move the robot with your keyboard:
+
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
