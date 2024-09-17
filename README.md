@@ -30,7 +30,7 @@ source install/setup.sh
 Launch Gazebo:
 
 ```bash
-ros2 launch rover_bringup launch_sim.launch.py world:=src/rover_gazebo/worlds/obstacles.world
+ros2 launch rover_gazebo sim.launch.py world:=src/rover_gazebo/worlds/obstacles.world
 ```
 
 Launch RViz:
