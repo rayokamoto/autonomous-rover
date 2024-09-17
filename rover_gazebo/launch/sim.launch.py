@@ -12,11 +12,12 @@ def generate_launch_description():
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
 
     bringup_package = "rover_bringup"
+    model_package = "rover_description"
 
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
-                [FindPackageShare("rover_description"), "launch", "description.launch.py"]
+                [FindPackageShare(model_package), "launch", "description.launch.py"]
             )
         ),
         launch_arguments={"use_sim_time": "true", "use_ros2_control": "true"}.items(),
@@ -62,7 +63,7 @@ def generate_launch_description():
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        arguments=["-topic", "robot_description", "-entity", "rover"],
+        arguments=["-topic", model_package, "-entity", "rover"],
         output="screen",
     )
 
