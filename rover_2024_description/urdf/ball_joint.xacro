@@ -4,7 +4,7 @@
 <xacro:macro name="ball_joint" params="name parent child *origin">
 
   <joint name="${name}_joint" type="continuous">
-    <parent link="base_link"/>
+    <parent link="${parent}"/>
     <child link="${name}_link1"/>
     <axis xyz="0 1 0" />
   </joint>

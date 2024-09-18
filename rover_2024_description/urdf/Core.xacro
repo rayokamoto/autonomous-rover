@@ -8,6 +8,15 @@
 <xacro:include filename="$(find rover_2024_description)/urdf/ball_joint.xacro" />
 
 <link name="base_link">
+</link>
+
+<joint name="chassis_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="chassis"/>
+  <origin xyz="0 0 0.3" rpy="${pi/2} 0 0"/>
+</joint>
+
+<link name="chassis">
   <inertial>
     <origin xyz="-0.01226587986232331 0.09909397702738384 -0.005243928985965616" rpy="0 0 0"/>
     <mass value="5.68714230151846"/>
@@ -406,6 +415,8 @@
   </collision>
 </link>
 
+<!-- Joints -->
+
 <joint name="Revolute 3" type="continuous">
   <origin xyz="0.0001 -0.08972 -0.184859" rpy="0 0 0"/>
   <parent link="Rocker1_1"/>
@@ -492,7 +503,7 @@
 
 <xacro:ball_joint
   name="Ball 18"
-  parent="base_link"
+  parent="chassis"
   child="DiffBar2_1"
 >
   <origin xyz="-0.207 -0.03643 0.049294" rpy="0 0 0"/>
@@ -500,7 +511,7 @@
 
 <xacro:ball_joint
   name="Ball 19"
-  parent="base_link"
+  parent="chassis"
   child="DiffBar1_1"
 >
   <origin xyz="0.2111 -0.036406 0.047214" rpy="0 0 0"/>
@@ -531,20 +542,20 @@
 
 <joint name="Planar 27" type="planar">
   <origin xyz="0.027224 0.0 -0.072776" rpy="0 0 0"/>
-  <parent link="base_link"/>
+  <parent link="chassis"/>
   <child link="Diff_1"/>
 </joint>
 
 <joint name="Revolute 28" type="continuous">
   <origin xyz="-0.2446 0.079599 0.049591" rpy="0 0 0"/>
-  <parent link="base_link"/>
+  <parent link="chassis"/>
   <child link="Rocker1_1"/>
   <axis xyz="-1.0 0.0 0.0"/>
 </joint>
 
 <joint name="Revolute 29" type="continuous">
   <origin xyz="0.2476 0.079599 0.049591" rpy="0 0 0"/>
-  <parent link="base_link"/>
+  <parent link="chassis"/>
   <child link="Rocker2_1"/>
   <axis xyz="1.0 0.0 0.0"/>
 </joint>
