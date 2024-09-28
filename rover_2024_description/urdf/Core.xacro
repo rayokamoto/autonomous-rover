@@ -1,0 +1,563 @@
+<?xml version="1.0" ?>
+<robot name="Core" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find rover_2024_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find rover_2024_description)/urdf/Core.trans" />
+<xacro:include filename="$(find rover_2024_description)/urdf/Core.gazebo" />
+
+<xacro:include filename="$(find rover_2024_description)/urdf/ball_joint.xacro" />
+
+<link name="base_link">
+</link>
+
+<joint name="chassis_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="chassis"/>
+  <origin xyz="0 0 0.3" rpy="${pi/2} 0 0"/>
+</joint>
+
+<link name="chassis">
+  <inertial>
+    <origin xyz="-0.01226587986232331 0.09909397702738384 -0.005243928985965616" rpy="0 0 0"/>
+    <mass value="5.68714230151846"/>
+    <inertia ixx="0.100194" iyy="0.163819" izz="0.098771" ixy="-0.000955" iyz="0.001122" ixz="0.011357"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Bogie1_1">
+  <inertial>
+    <origin xyz="-0.0211335101446109 -0.06540349853664969 -0.04405979823998957" rpy="0 0 0"/>
+    <mass value="0.6872785004890269"/>
+    <inertia ixx="0.043992" iyy="0.03496" izz="0.010502" ixy="0.000148" iyz="0.016905" ixz="-0.000546"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.2445 0.010121 0.135268" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Bogie1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.2445 0.010121 0.135268" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Bogie1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Bogie2_1">
+  <inertial>
+    <origin xyz="0.02769070367075127 -0.07319346532458704 -0.03183570260361626" rpy="0 0 0"/>
+    <mass value="0.7284452845191887"/>
+    <inertia ixx="0.046405" iyy="0.037138" izz="0.011616" ixy="0.000391" iyz="0.017996" ixz="-0.000339"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.2471 0.006793 0.136847" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Bogie2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.2471 0.006793 0.136847" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Bogie2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Steer1_1">
+  <inertial>
+    <origin xyz="0.0764024357441769 -0.1363396864909519 0.0016842442135732716" rpy="0 0 0"/>
+    <mass value="1.0941914193022018"/>
+    <inertia ixx="0.002219" iyy="0.001381" izz="0.003267" ixy="0.000225" iyz="2.6e-05" ixz="-1.6e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.2775 0.071342 -0.404096" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.2775 0.071342 -0.404096" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Steer2_1">
+  <inertial>
+    <origin xyz="0.07618727453672328 -0.13641952948582164 -0.00075650740760419" rpy="0 0 0"/>
+    <mass value="1.0985761387258273"/>
+    <inertia ixx="0.002217" iyy="0.001394" izz="0.003278" ixy="0.000222" iyz="-8e-06" ixz="-1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.277 0.044704 0.431747" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.277 0.044704 0.431747" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Steer3_1">
+  <inertial>
+    <origin xyz="-0.076402435744227 -0.13628084742041585 -0.004826615591165706" rpy="0 0 0"/>
+    <mass value="1.0941914193024984"/>
+    <inertia ixx="0.002215" iyy="0.001383" izz="0.003262" ixy="-0.000225" iyz="-6.9e-05" ixz="-2.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.2801 0.077673 -0.401333" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.2801 0.077673 -0.401333" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Steer4_1">
+  <inertial>
+    <origin xyz="-0.0765743630274647 -0.1362369056022871 -0.004821570618702475" rpy="0 0 0"/>
+    <mass value="1.090683643763887"/>
+    <inertia ixx="0.002214" iyy="0.001373" izz="0.003251" ixy="-0.000227" iyz="-6.9e-05" ixz="-2.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.28 0.041376 0.433326" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.28 0.041376 0.433326" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Steer4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Wheel1_1">
+  <inertial>
+    <origin xyz="-0.032404481718274314 1.5121106762272518e-06 -0.0005651690910734586" rpy="0 0 0"/>
+    <mass value="1.0947784607478628"/>
+    <inertia ixx="0.004719" iyy="0.003307" izz="0.003308" ixy="-0.0" iyz="-0.0" ixz="2.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.254755 0.221444 -0.40509" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.254755 0.221444 -0.40509" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Wheel2_1">
+  <inertial>
+    <origin xyz="-0.03240448172167515 1.194789706046584e-05 -0.000565876842522739" rpy="0 0 0"/>
+    <mass value="1.094778460888705"/>
+    <inertia ixx="0.004719" iyy="0.003307" izz="0.003308" ixy="-1e-06" iyz="-0.0" ixz="2.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.254755 0.1948 0.433443" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.254755 0.1948 0.433443" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Wheel3_1">
+  <inertial>
+    <origin xyz="0.03240446327534102 -1.1327120042564642e-05 0.0005656032176841741" rpy="0 0 0"/>
+    <mass value="1.094778494969289"/>
+    <inertia ixx="0.004719" iyy="0.003307" izz="0.003308" ixy="-1e-06" iyz="-0.0" ixz="2.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.257355 0.227712 -0.396879" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.257355 0.227712 -0.396879" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Wheel4_1">
+  <inertial>
+    <origin xyz="0.03240446327537522 -1.1508115992625578e-05 0.0005657822358549058" rpy="0 0 0"/>
+    <mass value="1.094778494969318"/>
+    <inertia ixx="0.004719" iyy="0.003307" izz="0.003308" ixy="-1e-06" iyz="-0.0" ixz="2.5e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.256855 0.191415 0.43778" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.256855 0.191415 0.43778" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Wheel5_1">
+  <inertial>
+    <origin xyz="-0.0070794733070507765 9.143958681900877e-08 2.4105950757746797e-07" rpy="0 0 0"/>
+    <mass value="1.0519112699091"/>
+    <inertia ixx="0.00471" iyy="0.00329" izz="0.00329" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.3925 0.202059 -0.031348" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.3925 0.202059 -0.031348" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Wheel6_1">
+  <inertial>
+    <origin xyz="-0.0024091661610902704 3.792349622944169e-07 -3.581103987029821e-07" rpy="0 0 0"/>
+    <mass value="1.0947740299435103"/>
+    <inertia ixx="0.004719" iyy="0.003307" izz="0.003307" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.3795 0.205408 -0.033927" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.3795 0.205408 -0.033927" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Wheel6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="DiffBar2_1">
+  <inertial>
+    <origin xyz="0.014428527803834551 -0.004079877254317771 -0.07616881163912506" rpy="0 0 0"/>
+    <mass value="0.017701114106862734"/>
+    <inertia ixx="5.7e-05" iyy="6e-05" izz="4e-06" ixy="1e-06" iyz="-3e-06" ixz="1.4e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.207 0.03643 -0.049294" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/DiffBar2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.207 0.03643 -0.049294" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/DiffBar2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="DiffBar1_1">
+  <inertial>
+    <origin xyz="-0.01697504306853259 -0.007725910100643087 -0.07613558985829658" rpy="0 0 0"/>
+    <mass value="0.017701113986188243"/>
+    <inertia ixx="5.9e-05" iyy="5.9e-05" izz="3e-06" ixy="-1e-06" iyz="-7e-06" ixz="-9e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.2111 0.036406 -0.047214" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/DiffBar1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.2111 0.036406 -0.047214" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/DiffBar1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="DiffBar_1">
+  <inertial>
+    <origin xyz="5.793181866446846e-07 0.011991541025058026 -4.143712121582044e-06" rpy="0 0 0"/>
+    <mass value="0.049386558164014785"/>
+    <inertia ixx="1.5e-05" iyy="0.000584" izz="0.000578" ixy="-0.0" iyz="0.0" ixz="5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.003824 0.0565 0.102778" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/DiffBar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.003824 0.0565 0.102778" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/DiffBar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Diff_1">
+  <inertial>
+    <origin xyz="-0.023399892827863138 -0.015972729592867923 -0.03000168455798964" rpy="0 0 0"/>
+    <mass value="0.061438839494194306"/>
+    <inertia ixx="2.5e-05" iyy="2.6e-05" izz="2.5e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.027224 -0.0 0.072776" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Diff_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.027224 -0.0 0.072776" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Diff_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Rocker1_1">
+  <inertial>
+    <origin xyz="-0.017477058363354586 -0.055456015755604215 0.25975790546845035" rpy="0 0 0"/>
+    <mass value="0.3947619194415518"/>
+    <inertia ixx="0.013429" iyy="0.012865" izz="0.001071" ixy="-2.1e-05" iyz="0.000505" ixz="0.001202"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.2446 -0.079599 -0.049591" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Rocker1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.2446 -0.079599 -0.049591" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Rocker1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Rocker2_1">
+  <inertial>
+    <origin xyz="0.01699021881341367 -0.06021784788169453 0.2569117840372963" rpy="0 0 0"/>
+    <mass value="0.39646263112842717"/>
+    <inertia ixx="0.013772" iyy="0.013186" izz="0.001095" ixy="4.1e-05" iyz="0.000693" ixz="-0.001215"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.2476 -0.079599 -0.049591" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Rocker2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.2476 -0.079599 -0.049591" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rover_2024_description)/meshes/Rocker2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- Joints -->
+
+<joint name="Revolute 3" type="continuous">
+  <origin xyz="0.0001 -0.08972 -0.184859" rpy="0 0 0"/>
+  <parent link="Rocker1_1"/>
+  <child link="Bogie1_1"/>
+  <axis xyz="1.0 -0.0 -0.0"/>
+</joint>
+
+<joint name="Revolute 4" type="continuous">
+  <origin xyz="-0.0005 -0.086392 -0.186438" rpy="0 0 0"/>
+  <parent link="Rocker2_1"/>
+  <child link="Bogie2_1"/>
+  <axis xyz="1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="Revolute 5" type="continuous">
+  <origin xyz="-0.0329 -0.150941 0.354505" rpy="0 0 0"/>
+  <parent link="Rocker1_1"/>
+  <child link="Steer1_1"/>
+  <axis xyz="-0.0 -0.999997 -0.002562"/>
+</joint>
+
+<joint name="Revolute 6" type="continuous">
+  <origin xyz="-0.0325 -0.034583 -0.296479" rpy="0 0 0"/>
+  <parent link="Bogie1_1"/>
+  <child link="Steer2_1"/>
+  <axis xyz="-0.0 -0.99979 -0.020488"/>
+</joint>
+
+<joint name="Revolute 7" type="continuous">
+  <origin xyz="0.0325 -0.157272 0.351742" rpy="0 0 0"/>
+  <parent link="Rocker2_1"/>
+  <child link="Steer3_1"/>
+  <axis xyz="0.0 -0.99979 -0.020488"/>
+</joint>
+
+<joint name="Revolute 8" type="continuous">
+  <origin xyz="0.0329 -0.034583 -0.296479" rpy="0 0 0"/>
+  <parent link="Bogie2_1"/>
+  <child link="Steer4_1"/>
+  <axis xyz="0.0 -0.99979 -0.020488"/>
+</joint>
+
+<joint name="Revolute 9" type="continuous">
+  <origin xyz="0.022745 -0.150102 0.000994" rpy="0 0 0"/>
+  <parent link="Steer1_1"/>
+  <child link="Wheel1_1"/>
+  <axis xyz="-0.999848 4.5e-05 -0.017452"/>
+</joint>
+
+<joint name="Revolute 10" type="continuous">
+  <origin xyz="0.022245 -0.150096 -0.001696" rpy="0 0 0"/>
+  <parent link="Steer2_1"/>
+  <child link="Wheel2_1"/>
+  <axis xyz="-0.999848 0.000358 -0.017449"/>
+</joint>
+
+<joint name="Revolute 11" type="continuous">
+  <origin xyz="-0.022745 -0.150039 -0.004454" rpy="0 0 0"/>
+  <parent link="Steer3_1"/>
+  <child link="Wheel3_1"/>
+  <axis xyz="0.999848 -0.000358 0.017449"/>
+</joint>
+
+<joint name="Revolute 12" type="continuous">
+  <origin xyz="-0.023145 -0.150039 -0.004454" rpy="0 0 0"/>
+  <parent link="Steer4_1"/>
+  <child link="Wheel4_1"/>
+  <axis xyz="0.999848 -0.000358 0.017449"/>
+</joint>
+
+<joint name="Revolute 13" type="continuous">
+  <origin xyz="0.1454 -0.195266 0.168195" rpy="0 0 0"/>
+  <parent link="Bogie2_1"/>
+  <child link="Wheel5_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolute 14" type="continuous">
+  <origin xyz="-0.135 -0.195287 0.169195" rpy="0 0 0"/>
+  <parent link="Bogie1_1"/>
+  <child link="Wheel6_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<xacro:ball_joint
+  name="Ball 18"
+  parent="chassis"
+  child="DiffBar2_1"
+>
+  <origin xyz="-0.207 -0.03643 0.049294" rpy="0 0 0"/>
+</xacro:ball_joint>
+
+<xacro:ball_joint
+  name="Ball 19"
+  parent="chassis"
+  child="DiffBar1_1"
+>
+  <origin xyz="0.2111 -0.036406 0.047214" rpy="0 0 0"/>
+</xacro:ball_joint>
+
+<xacro:ball_joint
+  name="Ball 20"
+  parent="DiffBar1_1"
+  child="DiffBar_1"
+>
+  <origin xyz="-0.207276 -0.020094 -0.149992" rpy="0 0 0"/>
+</xacro:ball_joint>
+
+<xacro:ball_joint
+  name="Ball 22"
+  parent="DiffBar2_1"
+  child="DiffBar_1"
+>
+  <origin xyz="0.210824 -0.02007 -0.152072" rpy="0 0 0"/>
+</xacro:ball_joint>
+
+<joint name="Revolute 24" type="continuous">
+  <origin xyz="-0.0234 -0.0565 -0.030002" rpy="0 0 0"/>
+  <parent link="Diff_1"/>
+  <child link="DiffBar_1"/>
+  <axis xyz="-0.0 1.0 -0.0"/>
+</joint>
+
+<joint name="Planar 27" type="planar">
+  <origin xyz="0.027224 0.0 -0.072776" rpy="0 0 0"/>
+  <parent link="chassis"/>
+  <child link="Diff_1"/>
+</joint>
+
+<joint name="Revolute 28" type="continuous">
+  <origin xyz="-0.2446 0.079599 0.049591" rpy="0 0 0"/>
+  <parent link="chassis"/>
+  <child link="Rocker1_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolute 29" type="continuous">
+  <origin xyz="0.2476 0.079599 0.049591" rpy="0 0 0"/>
+  <parent link="chassis"/>
+  <child link="Rocker2_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+</robot>

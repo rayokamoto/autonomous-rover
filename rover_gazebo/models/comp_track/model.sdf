@@ -5,9 +5,16 @@
     <static>true</static>
     <link name="body">
       <visual name="visual">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh><uri>model://comp_track/comp_track.dae</uri></mesh>
         </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
       </visual>
       <collision name="collision">
         <geometry>
