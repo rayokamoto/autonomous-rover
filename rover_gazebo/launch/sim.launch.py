@@ -1,7 +1,7 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -9,7 +9,14 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
+    # Declare the Gazebo world file argument with a default world as fallback
+    world_arg = DeclareLaunchArgument(
+        "world",
+        default_value=PathJoinSubstitution(
+            [FindPackageShare("rover_gazebo"), "worlds", "comp_track.world"]
+        ),
+        description="Gazebo world file"
+    )
 
     bringup_package = "rover_bringup"
     model_package = "rover_description"
@@ -46,7 +53,7 @@ def generate_launch_description():
         [FindPackageShare(bringup_package), "config", "gazebo_params.yaml"]
     )
 
-    # Include the Gazebo launch file, provided by the gazebo_ros package
+    # Include the Gazebo launch file, using the relative world path provided as argument
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
@@ -54,12 +61,12 @@ def generate_launch_description():
             )
         ),
         launch_arguments={
-            "extra_gazebo_args": "--ros-args --params-file "
-            + gazebo_params_file.describe()
+            "world": LaunchConfiguration("world"),
+            "extra_gazebo_args": "--ros-args --params-file " + gazebo_params_file.describe()
         }.items(),
     )
 
-    # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
+    # Run the spawner node from the gazebo_ros package.
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
@@ -98,6 +105,7 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription(
         [
+            world_arg,
             rsp,
             joystick,
             twist_mux,

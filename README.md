@@ -30,13 +30,26 @@ source install/setup.sh
 Launch Gazebo:
 
 ```bash
-ros2 launch rover_gazebo sim.launch.py world:=src/rover_gazebo/worlds/obstacles.world
+ros2 launch rover_gazebo sim.launch.py
+```
+
+Launch Localization:
+
+```bash
+ros2 launch rover_slam localization_launch.py
 ```
 
 Launch RViz:
 
 ```bash
-ros2 run rviz2 rviz2 -d src/rover_description/rviz/main.rviz --ros-args -p use_sim_time:=true
+ros2 launch rover_gazebo rviz.launch.py
+```
+
+Launch slam_toolbox:
+
+```bash
+
+ros2 launch rover_slam slam_toolbox_launch.py
 ```
 
 Move the robot with your keyboard:
@@ -44,12 +57,3 @@ Move the robot with your keyboard:
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
-
-
-colcon build --symlink-install
-source install/setup.sh
-ros2 launch rover_gazebo sim.launch.py world:=/home/phoenix/dev_ws/src/autonomous-rover/rover_gazebo/worlds/obstacles.world
-ros2 launch rover_slam localization_launch.py
-rviz2 -d /home/phoenix/dev_ws/src/autonomous-rover/rover_description/rviz/map.rviz --ros-args -p use_sim_time:=true
-ros2 launch rover_navigation online_async_launch.py params_file:=/home/phoenix/dev_ws/src/autonomous-rover/rover_bringup/config/mapper_params_online_async.yaml use_sim_time:=true
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
