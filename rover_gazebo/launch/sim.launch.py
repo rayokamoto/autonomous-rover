@@ -13,7 +13,7 @@ def generate_launch_description():
     world_arg = DeclareLaunchArgument(
         "world",
         default_value=PathJoinSubstitution(
-            [FindPackageShare("rover_gazebo"), "worlds", "comp_track.world"]
+            [FindPackageShare("rover_gazebo"), "worlds", "obstacles.world"]
         ),
         description="Gazebo world file"
     )

@@ -52,6 +52,12 @@ Launch slam_toolbox:
 ros2 launch rover_slam slam_toolbox_launch.py
 ```
 
+Launch costmap:
+
+```bash
+ros2 launch rover_navigation navigation_launch.py
+```
+
 Move the robot with your keyboard:
 
 ```bash
