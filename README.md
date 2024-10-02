@@ -36,7 +36,7 @@ ros2 launch rover_gazebo sim.launch.py
 Launch Localization:
 
 ```bash
-ros2 launch rover_slam localization_launch.py
+ros2 launch rover_slam localization.launch.py
 ```
 
 Launch RViz:
@@ -49,13 +49,13 @@ Launch slam_toolbox:
 
 ```bash
 
-ros2 launch rover_slam slam_toolbox_launch.py
+ros2 launch rover_slam slam_toolbox.launch.py
 ```
 
 Launch costmap:
 
 ```bash
-ros2 launch rover_navigation navigation_launch.py
+ros2 launch rover_navigation navigation.launch.py
 ```
 
 Move the robot with your keyboard:
