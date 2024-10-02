@@ -8,18 +8,18 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
+    bringup_package = "rover_bringup"
+    model_package = "rover_description"
+    gazebo_package = "rover_gazebo"
 
     # Declare the Gazebo world file argument with a default world as fallback
     world_arg = DeclareLaunchArgument(
         "world",
         default_value=PathJoinSubstitution(
-            [FindPackageShare("rover_gazebo"), "worlds", "obstacles.world"]
+            [FindPackageShare(gazebo_package), "worlds", "obstacles.world"]
         ),
         description="Gazebo world file"
     )
-
-    bringup_package = "rover_bringup"
-    model_package = "rover_description"
 
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -50,7 +50,7 @@ def generate_launch_description():
     )
 
     gazebo_params_file = PathJoinSubstitution(
-        [FindPackageShare(bringup_package), "config", "gazebo_params.yaml"]
+        [FindPackageShare(gazebo_package), "config", "gazebo_params.yaml"]
     )
 
     # Include the Gazebo launch file, using the relative world path provided as argument

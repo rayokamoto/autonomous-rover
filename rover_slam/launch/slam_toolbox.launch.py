@@ -10,7 +10,7 @@ def generate_launch_description():
         "params_file",
         default_value=PathJoinSubstitution(
             [
-                FindPackageShare("rover_bringup"),
+                FindPackageShare("rover_slam"),
                 "config",
                 "mapper_params_online_async.yaml",
             ]

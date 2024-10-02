@@ -9,7 +9,7 @@ from nav2_common.launch import RewrittenYaml
 
 def generate_launch_description():
     # Get the launch directory
-    bringup_dir = FindPackageShare("rover_bringup")
+    nav_dir = FindPackageShare("rover_navigation")
     slam_dir = FindPackageShare("rover_slam")
 
     namespace = LaunchConfiguration("namespace")
@@ -64,7 +64,7 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 "params_file",
                 default_value=PathJoinSubstitution(
-                    [bringup_dir, "config", "nav2_params.yaml"]
+                    [nav_dir, "config", "nav2_params.yaml"]
                 ),
                 description="Full path to the ROS2 parameters file to use",
             ),

@@ -15,7 +15,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     params_file = LaunchConfiguration("params_file")
     default_params_file = PathJoinSubstitution(
-        [FindPackageShare("rover_bringup"), "config", "mapper_params_online_async.yaml"]
+        [FindPackageShare("rover_slam"), "config", "mapper_params_online_async.yaml"]
     )
 
     declare_use_sim_time_argument = DeclareLaunchArgument(
