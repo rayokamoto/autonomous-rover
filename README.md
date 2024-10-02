@@ -30,13 +30,32 @@ source install/setup.sh
 Launch Gazebo:
 
 ```bash
-ros2 launch rover_gazebo sim.launch.py world:=src/rover_gazebo/worlds/obstacles.world
+ros2 launch rover_gazebo sim.launch.py
+```
+
+Launch Localization:
+
+```bash
+ros2 launch rover_slam localization.launch.py
 ```
 
 Launch RViz:
 
 ```bash
-ros2 run rviz2 rviz2 -d src/rover_description/rviz/main.rviz --ros-args -p use_sim_time:=true
+ros2 launch rover_gazebo rviz.launch.py
+```
+
+Launch slam_toolbox:
+
+```bash
+
+ros2 launch rover_slam slam_toolbox.launch.py
+```
+
+Launch costmap:
+
+```bash
+ros2 launch rover_navigation navigation.launch.py
 ```
 
 Move the robot with your keyboard:

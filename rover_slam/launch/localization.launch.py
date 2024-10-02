@@ -26,6 +26,7 @@ from nav2_common.launch import RewrittenYaml
 def generate_launch_description():
     # Get the launch directory
     bringup_dir = get_package_share_directory("rover_bringup")
+    slam_dir = get_package_share_directory("rover_slam")
 
     namespace = LaunchConfiguration("namespace")
     map_yaml_file = LaunchConfiguration("map")
@@ -62,7 +63,7 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 "map",
                 default_value=os.path.join(
-                    bringup_dir, "maps", "turtlebot3_world.yaml"
+                    slam_dir, "maps", "turtlebot3_world.yaml"
                 ),
                 description="Full path to map yaml file to load",
             ),

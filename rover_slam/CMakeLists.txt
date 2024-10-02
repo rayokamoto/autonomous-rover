@@ -4,7 +4,7 @@ project(rover_slam)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY launch
+  DIRECTORY launch config maps
   DESTINATION share/${PROJECT_NAME}
 )
 
