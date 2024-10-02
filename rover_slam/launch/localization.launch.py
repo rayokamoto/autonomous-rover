@@ -1,32 +1,16 @@
-# Copyright (c) 2018 Intel Corporation
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-import os
-
-from ament_index_python.packages import get_package_share_directory
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+
 from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
     # Get the launch directory
-    bringup_dir = get_package_share_directory("rover_bringup")
-    slam_dir = get_package_share_directory("rover_slam")
+    nav_dir = FindPackageShare("rover_navigation")
+    slam_dir = FindPackageShare("rover_slam")
 
     namespace = LaunchConfiguration("namespace")
     map_yaml_file = LaunchConfiguration("map")
@@ -62,8 +46,8 @@ def generate_launch_description():
             ),
             DeclareLaunchArgument(
                 "map",
-                default_value=os.path.join(
-                    slam_dir, "maps", "turtlebot3_world.yaml"
+                default_value=PathJoinSubstitution(
+                    [slam_dir, "maps", "turtlebot3_world.yaml"]
                 ),
                 description="Full path to map yaml file to load",
             ),
@@ -79,7 +63,9 @@ def generate_launch_description():
             ),
             DeclareLaunchArgument(
                 "params_file",
-                default_value=os.path.join(bringup_dir, "config", "nav2_params.yaml"),
+                default_value=PathJoinSubstitution(
+                    [nav_dir, "config", "nav2_params.yaml"]
+                ),
                 description="Full path to the ROS2 parameters file to use",
             ),
             Node(

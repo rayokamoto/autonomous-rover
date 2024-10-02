@@ -1,7 +1,11 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, LogInfo
 from launch.conditions import UnlessCondition
-from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoinSubstitution
+from launch.substitutions import (
+    LaunchConfiguration,
+    PythonExpression,
+    PathJoinSubstitution,
+)
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from nav2_common.launch import HasNodeParams
@@ -11,7 +15,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     params_file = LaunchConfiguration("params_file")
     default_params_file = PathJoinSubstitution(
-        [FindPackageShare("rover_bringup"), "config", "mapper_params_online_async.yaml"]
+        [FindPackageShare("rover_slam"), "config", "mapper_params_online_async.yaml"]
     )
 
     declare_use_sim_time_argument = DeclareLaunchArgument(
