@@ -14,7 +14,7 @@ def generate_launch_description():
     )
 
     rviz_config_path = PathJoinSubstitution(
-        [FindPackageShare("rover_description"), "rviz", "map.rviz"]
+        [FindPackageShare("rover_basic_description"), "rviz", "map.rviz"]
     )
 
     rviz_node = Node(
