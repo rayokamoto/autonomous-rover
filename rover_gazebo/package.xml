@@ -12,10 +12,20 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
-  <!-- <depend>gazebo_ros</depend> -->
-  <!-- <exec_depend>gazebo_ros_pkgs</exec_depend> -->
+  <depend>gazebo</depend>
+  <depend>gazebo_ros</depend>
+  <depend>controller_manager</depend>
+  <depend>rviz2</depend>
+
+  <depend>rover_description</depend>
+  <depend>rover_msgs</depend>
+  <depend>rover_motor_controller_cpp</depend>
+
+  <depend>std_msgs</depend>
+  <depend>trajectory_msgs</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
   </export>
 </package>

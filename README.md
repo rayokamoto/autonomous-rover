@@ -20,42 +20,33 @@ Install the autonomous-rover package:
 
 ```bash
 git clone https://github.com/rayokamoto/autonomous-rover.git
-rosdep update && rosdep install --from-path src --ignore-src -y
-colcon build --symlink-install
+rosdep update && rosdep install --from-paths src -r -y
+colcon build
 source install/setup.sh
 ```
 
-**You need to run the following commands in seperate terminals.**
-
-Launch Gazebo:
+Launch sim (moon):
 
 ```bash
-ros2 launch rover_gazebo sim.launch.py
+ros2 launch rover_gazebo moon.launch.py
 ```
 
-Launch Localization:
+Launch sim (obstacles):
 
 ```bash
-ros2 launch rover_slam localization.launch.py
+ros2 launch rover_gazebo obstacles.launch.py
 ```
 
-Launch RViz:
+Launch sim (comp_track):
 
 ```bash
-ros2 launch rover_gazebo rviz.launch.py
+ros2 launch rover_gazebo comp_track.launch.py
 ```
 
-Launch slam_toolbox:
+Launch sim (apollo_17):
 
 ```bash
-
-ros2 launch rover_slam slam_toolbox.launch.py
-```
-
-Launch costmap:
-
-```bash
-ros2 launch rover_navigation navigation.launch.py
+ros2 launch rover_gazebo apollo_17.launch.py
 ```
 
 Move the robot with your keyboard:

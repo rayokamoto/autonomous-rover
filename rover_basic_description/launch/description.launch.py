@@ -12,7 +12,7 @@ def generate_launch_description():
 
     # Process the URDF file
     xacro_file = PathJoinSubstitution(
-        [FindPackageShare("rover_description"), "urdf", "robot.urdf.xacro"]
+        [FindPackageShare("rover_basic_description"), "urdf", "robot.urdf.xacro"]
     )
 
     robot_description_config = Command(

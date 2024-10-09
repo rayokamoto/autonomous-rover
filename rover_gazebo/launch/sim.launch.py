@@ -9,7 +9,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     bringup_package = "rover_bringup"
-    model_package = "rover_description"
+    model_package = "rover_basic_description"
     gazebo_package = "rover_gazebo"
 
     # Declare the Gazebo world file argument with a default world as fallback
