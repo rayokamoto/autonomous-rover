@@ -31,6 +31,12 @@ Launch sim (moon):
 ros2 launch rover_gazebo moon.launch.py
 ```
 
+Launch sim (moon_rocks):
+
+```bash
+ros2 launch rover_gazebo moon_rocks.launch.py
+```
+
 Launch sim (obstacles):
 
 ```bash
