@@ -60,3 +60,15 @@ Move the robot with your keyboard:
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
+
+Record movement using rosbag2
+
+```bash
+ros2 bag record /cmd_vel /odom
+```
+
+Play movement recorded using rosbag2
+
+```bash
+ros2 bag play src/autonomous-rover/rosbags/rosbag2_2024_10_17-12_02_10/rosbag2_2024_10_17-12_02_10_0.db3
+```
