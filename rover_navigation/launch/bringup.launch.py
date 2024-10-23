@@ -1,6 +1,3 @@
-import os
-
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
@@ -11,16 +8,16 @@ from launch.actions import (
 from launch.conditions import IfCondition
 from launch.launch_context import LaunchContext
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
-from launch_ros.actions import PushRosNamespace
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch_ros.actions import Node, PushRosNamespace
+from launch_ros.substitutions import FindPackageShare
 from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
     # Get the launch directory
-    pkg_dir = get_package_share_directory("rover_navigation")
-    launch_dir = os.path.join(pkg_dir, "launch")
+    pkg_dir = FindPackageShare("rover_navigation")
+    launch_dir = PathJoinSubstitution([pkg_dir, "launch"])
 
     stdout_linebuf_envvar = SetEnvironmentVariable(
         "RCUTILS_LOGGING_BUFFERED_STREAM", "1"
@@ -34,7 +31,9 @@ def generate_launch_description():
         planner = str(context.perform_substitution(planner))
         controller = str(context.perform_substitution(controller))
 
-        params_file = os.path.join(pkg_dir, "params", f"{planner}_{controller}.yaml")
+        params_file = PathJoinSubstitution(
+            [pkg_dir, "params", f"{planner}_{controller}.yaml"]
+        )
         param_substitutions = {"use_sim_time": LaunchConfiguration("use_sim_time")}
         configured_params = RewrittenYaml(
             source_file=params_file,
@@ -66,9 +65,7 @@ def generate_launch_description():
                 output="screen",
             ),
             IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(
-                    os.path.join(launch_dir, "navigation.launch.py")
-                ),
+                PathJoinSubstitution([launch_dir, "navigation.launch.py"]),
                 launch_arguments={
                     "namespace": LaunchConfiguration("namespace"),
                     "cmd_vel_topic": LaunchConfiguration("cmd_vel_topic"),
@@ -128,7 +125,7 @@ def generate_launch_description():
 
     declare_bt_xml_cmd = DeclareLaunchArgument(
         "default_bt_xml_filename",
-        default_value=os.path.join(pkg_dir, "behavior_trees", "rover_bt.xml"),
+        default_value=PathJoinSubstitution([pkg_dir, "behavior_trees", "rover_bt.xml"]),
         description="Full path to the behavior tree xml file to use",
     )
 
