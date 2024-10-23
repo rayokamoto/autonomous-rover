@@ -3,7 +3,7 @@
 <package format="3">
   <name>planner_benchmark</name>
   <version>0.0.1</version>
-  <description>Nav2 planner benchmark</description>
+  <description>Mapping benchmark</description>
   <maintainer email="my_email@email.com">maintainer</maintainer>
   <license>TODO: License declaration</license>
 

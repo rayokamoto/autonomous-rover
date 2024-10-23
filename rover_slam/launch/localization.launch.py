@@ -64,7 +64,7 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 "params_file",
                 default_value=PathJoinSubstitution(
-                    [nav_dir, "config", "nav2_params.yaml"]
+                    [nav_dir, "params", "nav2_params.yaml"]
                 ),
                 description="Full path to the ROS2 parameters file to use",
             ),
