@@ -72,3 +72,18 @@ Play movement recorded using rosbag2
 ```bash
 ros2 bag play src/autonomous-rover/rosbags/rosbag2_2024_10_17-12_02_10/rosbag2_2024_10_17-12_02_10_0.db3
 ```
+
+Get tum files for mapping benchmark
+
+```bash
+python3 src/autonomous-rover/benchmarks/mapping_benchmark/odom_to_tum.py
+```
+
+Display mapping benchmark graphs
+
+```bash
+cd src/autonomous-rover/benchmarks/mapping_benchmark
+evo_traj tum 1/ground_truth_trajectory.tum 1/estimated_trajectory.tum --plot 
+evo_ape tum 1/ground_truth_trajectory.tum 1/estimated_trajectory.tum --plot 
+evo_rpe tum 1/ground_truth_trajectory.tum 1/estimated_trajectory.tum --plot 
+```
