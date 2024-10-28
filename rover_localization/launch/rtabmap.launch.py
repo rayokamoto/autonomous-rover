@@ -10,7 +10,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     use_sim_time_cmd = DeclareLaunchArgument(
         "use_sim_time",
-        default_value="False",
+        default_value="True",
         description="Use simulation (Gazebo) clock if True")
 
     launch_rtabmapviz = LaunchConfiguration("launch_rtabmapviz")
@@ -34,7 +34,8 @@ def generate_launch_description():
         # 0=TORO, 1=g2o, 2=GTSAM and 3=Ceres
         "Optimizer/Strategy": "1",
         "Optimizer/GravitySigma": "0.0",
-
+        # 0=0.0, 1=0.5, 2=1.0, 3=1.5, 4=2.0
+        # Default 2.0
         "RGBD/OptimizeMaxError": "1.0",
         "RGBD/OptimizeFromGraphEnd": "true",
         "RGBD/CreateOccupancyGrid": "true",
@@ -50,6 +51,7 @@ def generate_launch_description():
         "Vis/EstimationType": "1",
         "Vis/ForwardEstOnly": "true",
         # 0=SURF 1=SIFT 2=ORB 3=FAST/FREAK 4=FAST/BRIEF 5=GFTT/FREAK 6=GFTT/BRIEF 7=BRISK 8=GFTT/ORB 9=KAZE 10=ORB-OCTREE 11=SuperPoint 12=SURF/FREAK 13=GFTT/DAISY 14=SURF/DAISY 15=PyDetector
+        # Default 8
         "Vis/FeatureType": "8",
         "Vis/DepthAsMask": "true",
         "Vis/CorGuessWinSize": "40",
@@ -59,6 +61,7 @@ def generate_launch_description():
         # 0=Features Matching, 1=Optical Flow
         "Vis/CorType": "0",
         # kNNFlannNaive=0, kNNFlannKdTree=1, kNNFlannLSH=2, kNNBruteForce=3, kNNBruteForceGPU=4, BruteForceCrossCheck=5, SuperGlue=6, GMS=7
+        # Default 1
         "Vis/CorNNType": "1",
 
         "Grid/Sensor": "1",
