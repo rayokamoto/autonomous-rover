@@ -27,20 +27,21 @@ from transforms3d.euler import euler2quat
 import numpy as np
 import rclpy
 
+from datatypes import BenchmarkSummary, BenchmarkMetrics, PlannerResult, ResultRuns
+
 
 def getPlannerResults(
     navigator: BasicNavigator,
     initial_pose: PoseStamped,
     goal_pose: PoseStamped,
     planners: list[str],
-):
-    results = []
+) -> list[PlannerResult]:
+    results: list[PlannerResult] = []
     for planner in planners:
         path = navigator._getPathImpl(initial_pose, goal_pose, planner, use_start=True)
-        if path is not None:
-            results.append(path)
-        else:
+        if path is None:
             return results
+        results.append(PlannerResult(planner, path))
     return results
 
 
@@ -129,8 +130,13 @@ def main():
     max_cost = 210
     side_buffer = 100
     time_stamp = navigator.get_clock().now().to_msg()
-    results = []
-    seed(33)
+    results: list[list[PlannerResult]] = []
+    # seed(33)
+    seed(1)
+
+    summary = BenchmarkSummary()
+    for p in planners:
+        summary.results[p] = ResultRuns()
 
     random_pairs = 100
     res = costmap_msg.metadata.resolution
@@ -144,19 +150,31 @@ def main():
         result = getPlannerResults(navigator, start, goal, planners)
         if len(result) == len(planners):
             results.append(result)
-            i = i + 1
+            i += 1
         else:
-            print("One of the planners was invalid")
+            valid_planners = [r.planner for r in result]
+            for p in planners:
+                if p not in valid_planners:
+                    summary.results[p].invalid += 1
+
+            print(
+                f"One or more of the planners were invalid. Valid planners: {[p.planner for p in result]}"
+            )
+        for r in result:
+            summary.results[r.planner].valid += 1
 
     print("Write Results...")
-    with open(os.getcwd() + "/results.pickle", "wb+") as f:
-        pickle.dump(results, f, pickle.HIGHEST_PROTOCOL)
 
-    with open(os.getcwd() + "/costmap.pickle", "wb+") as f:
-        pickle.dump(costmap_msg, f, pickle.HIGHEST_PROTOCOL)
+    metrics_pickle = BenchmarkMetrics(
+        costmap=costmap_msg,
+        planners=planners,
+        results=results,
+        summary=summary,
+    )
 
-    with open(os.getcwd() + "/planners.pickle", "wb+") as f:
-        pickle.dump(planners, f, pickle.HIGHEST_PROTOCOL)
+    with open(os.getcwd() + "/metrics.pickle", "wb+") as f:
+        pickle.dump(metrics_pickle, f, pickle.HIGHEST_PROTOCOL)
+
     print("Write Complete")
     exit(0)
 

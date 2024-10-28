@@ -140,9 +140,9 @@ def generate_launch_description():
     controller = LaunchConfiguration("controller")
     controller_cmd = DeclareLaunchArgument(
         "controller",
-        default_value="RPP",
-        choices=["RPP", "TEB"],
-        description="Nav2 controller (RPP or TEB)",
+        default_value="MPPI",
+        choices=["RPP", "TEB", "MPPI"],
+        description="Nav2 controller (RPP or TEB or MPPI)",
     )
 
     nav2_cmd = OpaqueFunction(function=run_nav2, args=[planner, controller])
