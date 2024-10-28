@@ -86,4 +86,56 @@ cd src/autonomous-rover/benchmarks/mapping_benchmark
 evo_traj tum 1/ground_truth_trajectory.tum 1/estimated_trajectory.tum --plot 
 evo_ape tum 1/ground_truth_trajectory.tum 1/estimated_trajectory.tum --plot 
 evo_rpe tum 1/ground_truth_trajectory.tum 1/estimated_trajectory.tum --plot 
+
+evo_traj tum \
+    1-0/SURF.tum \
+    1-1/SIFT.tum \
+    1-2/ORB.tum \
+    1-3/FAST-FREAK.tum \
+    1-4/FAST-BRIEF.tum \
+    1-5/GFTT-FREAK.tum \
+    1-6/GFTT-BRIEF.tum \
+    1-7/BRISK.tum \
+    1-8/GFTT-ORB.tum \
+    1-9/KAZE.tum \
+    1-10/ORB-OCTREE.tum \
+    1-11/SuperPoint.tum \
+    1-12/SURF-FREAK.tum \
+    1-13/GFTT-DAISY.tum \
+    1-14/SURF-DAISY.tum \
+    1-15/PyDetector.tum \
+    --ref 1-0/ground_truth_trajectory.tum \
+    -p --plot --plot_mode=xy --align
+
+evo_traj tum \
+    2-0/kNNFlannNaive.tum \
+    2-1/kNNFlannKdTree.tum \
+    2-2/kNNFlannLSH.tum \
+    2-3/kNNBruteForce.tum \
+    2-4/kNNBruteForceGPU.tum \
+    2-5/BruteForceCrossCheck.tum \
+    2-6/SuperGlue.tum \
+    2-7/GMS.tum \
+    --ref 2-0/ground_truth_trajectory.tum \
+    -p --plot --plot_mode=xy --align
+
+evo_traj tum \
+    3-0/00.tum \
+    3-1/05.tum \
+    3-2/10.tum \
+    3-3/15.tum \
+    3-4/20.tum \
+    --ref 3-0/ground_truth_trajectory.tum \
+    -p --plot --plot_mode=xy --align
+
+evo_res results/ape/featuretype/*.zip -p --use_filenames
+evo_res results/rpe/featuretype/*.zip -p --use_filenames
+
+evo_res results/ape/cornntype/*.zip -p --use_filenames
+evo_res results/rpe/cornntype/*.zip -p --use_filenames
+
+evo_res results/ape/optimisemaxerror/*.zip -p --use_filenames
+evo_res results/rpe/optimisemaxerror/*.zip -p --use_filenames
+
+python3 plot.py
 ```

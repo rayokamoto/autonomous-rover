@@ -43,11 +43,17 @@ class PathFollowerAndOdomToTUM(Node):
 
         # Waypoints (x, y)
         self.waypoints = [
-            (1.550826, 1.550826), # Start
-            (-2.0, 7.0),    # Waypoint 1
-            (-8.0, 3.0),    # Waypoint 2
-            (-6.0, -6.0),   # Waypoint 3
-            (1.550826, 1.550826)  # Return to Start
+            (1.550826, 1.550826),   # Start
+            (-2.0, 7.0),            # Waypoint 1 (north-west)
+            (-5.5, 5.0),            # Waypoint 2 (zig-zag south-west)
+            (-8.0, 3.0),            # Waypoint 3 (zig-zag further south-west)
+            (-10.0, 1.0),           # Waypoint 4 (zig-zag north-west)
+            (-12.0, -1.5),          # Waypoint 5 (far south)
+            (-10.0, -4.0),          # Waypoint 6 (north-east)
+            (-6.0, -6.0),           # Waypoint 7 (zig-zag south-east)
+            (-4.0, -8.0),           # Waypoint 8 (further south-east)
+            (-2.0, -6.5),           # Waypoint 9 (straight back north)
+            (1.550826, 1.550826)    # Return to Start
         ]
         
         self.current_waypoint_index = 0
