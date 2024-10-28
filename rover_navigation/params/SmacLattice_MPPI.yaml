@@ -276,15 +276,10 @@ map_saver:
 planner_server:
   ros__parameters:
     expected_planner_frequency: 20.0
-    planner_plugins: ["SmacHybrid", "SmacLattice", "Smac2d"]
-    SmacHybrid:
-      plugin: "nav2_smac_planner/SmacPlannerHybrid"
-      motion_model_for_search: REEDS_SHEPP
-      cost_penalty: 2.0 # cost between 1.5 and 3.5 is reasonable.
-    SmacLattice:
+    planner_plugins: [GridBased]
+    GridBased:
       plugin: "nav2_smac_planner/SmacPlannerLattice"
-    Smac2d:
-      plugin: "nav2_smac_planner/SmacPlanner2D"
+      # motion_model_for_search: REEDS_SHEPP
 
 smoother_server:
   ros__parameters:
