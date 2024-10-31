@@ -18,7 +18,7 @@ def generate_launch_description():
         default_value=PathJoinSubstitution(
             [FindPackageShare(gazebo_package), "worlds", "obstacles.world"]
         ),
-        description="Gazebo world file"
+        description="Gazebo world file",
     )
 
     rsp = IncludeLaunchDescription(
@@ -62,7 +62,8 @@ def generate_launch_description():
         ),
         launch_arguments={
             "world": LaunchConfiguration("world"),
-            "extra_gazebo_args": "--ros-args --params-file " + gazebo_params_file.describe()
+            "extra_gazebo_args": "--ros-args --params-file "
+            + gazebo_params_file.describe(),
         }.items(),
     )
 

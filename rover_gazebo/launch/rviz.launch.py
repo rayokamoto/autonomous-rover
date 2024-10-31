@@ -10,7 +10,7 @@ def generate_launch_description():
     use_sim_time_arg = DeclareLaunchArgument(
         "use_sim_time",
         default_value="true",
-        description="Use simulation (Gazebo) clock if true"
+        description="Use simulation (Gazebo) clock if true",
     )
 
     rviz_config_path = PathJoinSubstitution(
@@ -22,10 +22,7 @@ def generate_launch_description():
         executable="rviz2",
         arguments=["-d", rviz_config_path],
         parameters=[{"use_sim_time": LaunchConfiguration("use_sim_time")}],
-        output="screen"
+        output="screen",
     )
 
-    return LaunchDescription([
-        use_sim_time_arg,
-        rviz_node
-    ])
+    return LaunchDescription([use_sim_time_arg, rviz_node])
