@@ -1,18 +1,50 @@
 <root main_tree_to_execute="MainTree">
+  <TreeNodesModel>
+    <!-- Action Nodes -->
+    <Action ID="ComputePathToPose">
+      <input_port name="goal"/>
+      <output_port name="path"/>
+      <input_port name="planner_id" default="GridBased"/>
+    </Action>
+
+    <Action ID="FollowPath">
+      <input_port name="controller_id" default="FollowPath"/>
+      <input_port name="path"/>
+    </Action>
+
+    <Action ID="IsPathValid">
+      <input_port name="path"/>
+    </Action>
+
+    <Action ID="GlobalUpdatedGoal"/>
+
+    <!-- Control Nodes -->
+    <Control ID="Sequence"/>
+    <Control ID="Fallback"/>
+
+    <!-- Decorators -->
+    <Decorator ID="RateController">
+      <input_port name="hz"/>
+    </Decorator>
+    <Decorator ID="Inverter"/>
+
+  </TreeNodesModel>
+
   <BehaviorTree ID="MainTree">
-    <PipelineSequence name="NavigateWithReplanning">
+    <Sequence name="NavigateWithReplanning">
       <RateController hz="1.0">
-        <Fallback> 
-          <ReactiveSequence>
+        <Fallback name="ReplanIfNecessary">
+          <Sequence name="ValidatePath">
             <Inverter>
               <GlobalUpdatedGoal/>
             </Inverter>
             <IsPathValid path="{path}"/>
-          </ReactiveSequence>
+          </Sequence>
           <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
         </Fallback>
       </RateController>
       <FollowPath path="{path}" controller_id="FollowPath"/>
-    </PipelineSequence>
+    </Sequence>
   </BehaviorTree>
 </root>
+
